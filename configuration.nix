@@ -7,8 +7,20 @@
     ];
   
  
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+     boot.loader = {
+  efi = {
+    canTouchEfiVariables = true;
+  };
+
+  grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";          # Required for UEFI
+    useOSProber = true;        # THIS is the magic line
+  };
+};
+
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   time.timeZone = "Europe/London";
